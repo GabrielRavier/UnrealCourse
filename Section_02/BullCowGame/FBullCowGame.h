@@ -5,9 +5,9 @@ class FBullCowGame
 {
 public:
 	void Reset(int WordLength);	// TODO make a more rich return value
-	int GetMaxTries();
-	int GetCurrentTry();
-	bool IsGameWon();
+	int GetMaxTries() const;
+	int GetCurrentTry() const;
+	bool IsGameWon() const;
 	bool CheckGuessValidity(const std::string& Guess);	// TODO make a more rich return value
 
 private:
