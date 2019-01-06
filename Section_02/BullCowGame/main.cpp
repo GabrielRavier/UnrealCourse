@@ -4,8 +4,9 @@ using std::cout;
 
 int main()
 {
-
+	constexpr int WORD_LENGTH = 5;
 	cout << "Welcome to Bulls and Cows, a fun word game.\n";
-	cout << "Can you guess the X letter isogram I'm thinking of?\n";
+	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
+
 	return 0;
 }
