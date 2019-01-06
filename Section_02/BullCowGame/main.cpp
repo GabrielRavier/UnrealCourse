@@ -4,6 +4,7 @@
 using std::cout;
 using std::cin;
 using std::string;
+using std::getline;
 
 int main()
 {
@@ -15,7 +16,7 @@ int main()
 	// Get a guess from the player
 	cout << "Enter your guess : ";
 	string Guess = "";
-	cin >> Guess;
+	getline(cin, Guess);
 
 	// Repeat the guess back to them
 	cout << "Your guess was : " << Guess << '\n';
