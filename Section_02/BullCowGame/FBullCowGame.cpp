@@ -10,9 +10,16 @@ int FBullCowGame::GetCurrentTry() const
 	return m_CurrentTry;
 }
 
-void FBullCowGame::Reset(int WordLength)
+FBullCowGame::FBullCowGame()
 {
+	Reset();
+}
 
+void FBullCowGame::Reset()
+{
+	constexpr int MAX_TRIES = 8;
+	m_MaxTries = MAX_TRIES;
+	m_CurrentTry = 1;
 }
 
 
