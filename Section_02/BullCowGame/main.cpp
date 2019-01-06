@@ -7,17 +7,37 @@ using std::string;
 using std::getline;
 
 void PrintIntro();
-string GetGuessAndPrintBack();
+void PlayGame();
+string GetGuess();
 
+const std::string &PrintGuess(std::string &Guess);
+
+
+// Entry point for our application
 int main()
 {
 	PrintIntro();
 
-	GetGuessAndPrintBack();
+	PlayGame();
+
+	return 0; // Exit the application
+}
+
+
+void PlayGame()
+{
+	// Loop for the number of turns asking for guesses
+	constexpr int NUMBER_OF_TURNS = 5;
+	for (int i = 0; i < NUMBER_OF_TURNS; ++i)
+	{
+		auto Guess = GetGuess();
+		cout << "Your guess was : " << Guess;
+		cout << '\n';
+	}
 
 	cout << '\n';
-	return 0;
 }
+
 
 void PrintIntro()
 {
@@ -27,14 +47,13 @@ void PrintIntro()
 	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n\n";
 }
 
-string GetGuessAndPrintBack()
+
+string GetGuess()
 {
 	// Get a guess from the player
 	cout << "Enter your guess : ";
 	string Guess = "";
 	getline(cin, Guess);
 
-	// Repeat the guess back to them
-	cout << "Your guess was : " << Guess << '\n';
 	return Guess;
 }
