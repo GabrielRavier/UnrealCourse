@@ -9,16 +9,17 @@ using std::getline;
 void PrintIntro();
 void PlayGame();
 string GetGuess();
-
-const std::string &PrintGuess(std::string &Guess);
-
+bool AskToPlayAgain();
 
 // Entry point for our application
 int main()
 {
-	PrintIntro();
-
-	PlayGame();
+	do
+	{
+		PrintIntro();
+		PlayGame();
+	}
+	while (AskToPlayAgain());
 
 	return 0; // Exit the application
 }
@@ -52,8 +53,17 @@ string GetGuess()
 {
 	// Get a guess from the player
 	cout << "Enter your guess : ";
-	string Guess = "";
+	string Guess;
 	getline(cin, Guess);
 
 	return Guess;
+}
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again ? ";
+	string Response;
+	getline(cin, Response);
+
+	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
