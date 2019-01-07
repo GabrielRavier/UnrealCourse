@@ -21,6 +21,7 @@ int main()
 	{
 		PrintIntro();
 		PlayGame();
+		// TODO Add a game summary
 	} while (AskToPlayAgain());
 
 	return 0; // Exit the application
@@ -33,9 +34,14 @@ void PlayGame()
 	int MaxTries = BCGame.GetMaxTries();
 
 	// Loop for the number of turns asking for guesses
+	// TODO Change from for to while loop once we're validating files
 	for (int i = 0; i < MaxTries; ++i)
 	{
-		auto Guess = GetGuess();
+		auto Guess = GetGuess(); // TODO Make loop checking for valid guesses
+
+		// Submit valid guess to the game
+		// Print number of bulls and cows
+
 		cout << "Your guess was : " << Guess;
 		cout << '\n';
 	}
