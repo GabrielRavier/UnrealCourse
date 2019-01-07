@@ -1,15 +1,26 @@
+/*
+
+	This is the console executable, which makes use of the FBullCowGame class.
+	This acts as the view in a MVC pattern, and is responsible for all user interaction.
+	For game logic see the FBullCowGame class.
+
+*/
+
 #include <iostream>
 #include <string>
+#include <cstdint>
 #include "FBullCowGame.h"
 
 using std::cout;
 using std::cin;
-using std::string;
 using std::getline;
+
+using FText = std::string;
+using int32 = int32_t;
 
 void PrintIntro();
 void PlayGame();
-string GetGuess();
+FText GetGuess();
 bool AskToPlayAgain();
 
 FBullCowGame BCGame;	// Instantiate a new game
@@ -31,11 +42,11 @@ int main()
 void PlayGame()
 {
 	BCGame.Reset();
-	int MaxTries = BCGame.GetMaxTries();
+	int32 MaxTries = BCGame.GetMaxTries();
 
 	// Loop for the number of turns asking for guesses
 	// TODO Change from for to while loop once we're validating files
-	for (int i = 0; i < MaxTries; ++i)
+	for (int32 i = 0; i < MaxTries; ++i)
 	{
 		auto Guess = GetGuess(); // TODO Make loop checking for valid guesses
 
@@ -59,11 +70,11 @@ void PrintIntro()
 }
 
 
-string GetGuess()
+FText GetGuess()
 {
 	// Get a guess from the player
 	cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess : ";
-	string Guess;
+	FText Guess;
 	getline(cin, Guess);
 
 	return Guess;
@@ -72,7 +83,7 @@ string GetGuess()
 bool AskToPlayAgain()
 {
 	cout << "Do you want to play again ? ";
-	string Response;
+	FText Response;
 	getline(cin, Response);
 
 	return (Response[0] == 'y') || (Response[0] == 'Y');
