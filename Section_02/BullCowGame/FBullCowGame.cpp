@@ -19,6 +19,10 @@ void FBullCowGame::Reset()
 {
 	constexpr int MAX_TRIES = 8;
 	m_MaxTries = MAX_TRIES;
+
+	const FString HIDDEN_WORD = "planet";
+	m_HiddenWord = HIDDEN_WORD;
+
 	m_CurrentTry = 1;
 }
 
@@ -31,4 +35,13 @@ bool FBullCowGame::IsGameWon() const
 bool FBullCowGame::CheckGuessValidity(const FString& Guess)
 {
 	return false;
+}
+
+BullCowCount FBullCowGame::SubmitGuess(const FString & Guess)
+{
+	++m_CurrentTry;
+
+	BullCowCount BullCowCount;
+
+	return BullCowCount;
 }
