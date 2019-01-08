@@ -37,11 +37,22 @@ bool FBullCowGame::CheckGuessValidity(const FString& Guess)
 	return false;
 }
 
-BullCowCount FBullCowGame::SubmitGuess(const FString & Guess)
+FBullCowCount FBullCowGame::SubmitGuess(const FString& Guess)
 {
 	++m_CurrentTry;
 
-	BullCowCount BullCowCount;
+	FBullCowCount BullCowCount;
+
+	int32 HiddenWordLength = m_HiddenWord.length();
+	for (int32 i = 0; i < HiddenWordLength; ++i)
+	{
+		auto pos = m_HiddenWord.find(Guess[i], i);
+		if (pos == i)
+			++BullCowCount.Bulls;
+		else if (pos != FString::npos)
+			++BullCowCount.Cows;
+	}
+
 
 	return BullCowCount;
 }

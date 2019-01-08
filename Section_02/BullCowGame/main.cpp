@@ -51,10 +51,9 @@ void PlayGame()
 		auto Guess = GetGuess(); // TODO Make loop checking for valid guesses
 
 		// Submit valid guess to the game
+		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 		// Print number of bulls and cows
-
-		cout << "Your guess was : " << Guess;
-		cout << '\n';
+		cout << "Bulls = " << BullCowCount.Bulls << ". Cows = " << BullCowCount.Cows << '\n';
 	}
 
 	cout << '\n';
