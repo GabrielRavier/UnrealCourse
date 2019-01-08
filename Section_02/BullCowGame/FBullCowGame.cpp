@@ -43,10 +43,10 @@ FBullCowCount FBullCowGame::SubmitGuess(const FString& Guess)
 
 	FBullCowCount BullCowCount;
 
-	int32 HiddenWordLength = m_HiddenWord.length();
-	for (int32 i = 0; i < HiddenWordLength; ++i)
+	size_t HiddenWordLength = m_HiddenWord.length();
+	for (size_t i = 0; i < HiddenWordLength; ++i)
 	{
-		auto pos = m_HiddenWord.find(Guess[i], i);
+		auto pos = m_HiddenWord.find(Guess[i]);
 		if (pos == i)
 			++BullCowCount.Bulls;
 		else if (pos != FString::npos)
