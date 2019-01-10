@@ -10,6 +10,11 @@ int32 FBullCowGame::GetCurrentTry() const
 	return m_CurrentTry;
 }
 
+size_t FBullCowGame::GetHiddenWordLength() const
+{
+	return m_HiddenWord.length();
+}
+
 FBullCowGame::FBullCowGame()
 {
 	Reset();
@@ -26,13 +31,12 @@ void FBullCowGame::Reset()
 	m_CurrentTry = 1;
 }
 
-
 bool FBullCowGame::IsGameWon() const
 {
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(const FString& Guess)
+bool FBullCowGame::CheckGuessValidity(const FString& Guess) const
 {
 	return false;
 }
