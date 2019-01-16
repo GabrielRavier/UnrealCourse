@@ -67,8 +67,7 @@ void PrintIntro()
 	cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n\n";
 }
 
-
-FText GetGuess()
+FText GetGuess()	// Change to GetValidGuess and make it validate the guess
 {
 	// Get a guess from the player
 	cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess : ";
