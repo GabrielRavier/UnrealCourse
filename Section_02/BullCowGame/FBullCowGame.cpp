@@ -35,17 +35,17 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-EWordStatus FBullCowGame::CheckGuessValidity(const FString& Guess) const
+EGuessStatus FBullCowGame::CheckGuessValidity(const FString& Guess) const
 {
 	// TODO finish this
 	if (false)
-		return EWordStatus::NotIsogram;
+		return EGuessStatus::NotIsogram;
 	else if (false)
-		return EWordStatus::NotLowercase;
+		return EGuessStatus::NotLowercase;
 	else if (this->GetHiddenWordLength() != Guess.length())
-		return EWordStatus::WrongLength;
+		return EGuessStatus::WrongLength;
 
-	return EWordStatus::OK;
+	return EGuessStatus::OK;
 }
 
 FBullCowCount FBullCowGame::SubmitGuess(const FString& Guess)
