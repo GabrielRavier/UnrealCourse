@@ -41,7 +41,7 @@ public:
 	EGuessStatus CheckGuessValidity(const FString& Guess) const;
 
 	// Count bulls and cows, and increase try number assuming guess is valid
-	FBullCowCount SubmitGuess(const FString& Guess);
+	FBullCowCount SubmitValidGuess(const FString& Guess);
 
 private:
 	int32 m_CurrentTry;	// See Reset for initial values

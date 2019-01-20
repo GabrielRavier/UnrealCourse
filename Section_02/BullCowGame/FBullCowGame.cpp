@@ -48,12 +48,12 @@ EGuessStatus FBullCowGame::CheckGuessValidity(const FString& Guess) const
 	return EGuessStatus::OK;
 }
 
-FBullCowCount FBullCowGame::SubmitGuess(const FString& Guess)
+FBullCowCount FBullCowGame::SubmitValidGuess(const FString& Guess)
 {
 	++m_CurrentTry;
-
 	FBullCowCount BullCowCount;
 
+	// Loop through all the guess letters to try to find them in the hidden word
 	size_t HiddenWordLength = m_HiddenWord.length();
 	for (size_t i = 0; i < HiddenWordLength; ++i)
 	{
