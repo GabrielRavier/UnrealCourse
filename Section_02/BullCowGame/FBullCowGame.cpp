@@ -1,4 +1,5 @@
 #include "FBullCowGame.h"
+#include <algorithm>
 
 int32 FBullCowGame::GetMaxTries() const
 { 
@@ -28,20 +29,39 @@ void FBullCowGame::Reset()
 	m_MaxTries = MAX_TRIES;
 	m_HiddenWord = HIDDEN_WORD;
 	m_CurrentTry = 1;
+	m_IsGameWon = false;
 }
 
 bool FBullCowGame::IsGameWon() const
 {
-	return false;
+	return m_IsGameWon;
+}
+
+static bool IsIsogram(FString String)
+{
+	std::sort(String.begin(), String.end());
+
+	auto len = String.size();
+	for (size_t i = 1; i < len; ++i)
+		if (String[i] == String[i - 1])
+			return false;
+	return true;
+}
+
+static bool IsLowerCase(const FString& String)
+{
+	return std::find_if(String.begin(), String.end(), [](unsigned char c)
+	{
+		return (!isalnum(c) || !islower(c));
+	}) == String.end();
 }
 
 EGuessStatus FBullCowGame::CheckGuessValidity(const FString& Guess) const
 {
-	// TODO finish this
-	if (false)
-		return EGuessStatus::NotIsogram;
-	else if (false)
+	if (!IsLowerCase(Guess))
 		return EGuessStatus::NotLowercase;
+	else if (!IsIsogram(Guess))
+		return EGuessStatus::NotIsogram;
 	else if (this->GetHiddenWordLength() != Guess.length())
 		return EGuessStatus::WrongLength;
 
@@ -54,7 +74,7 @@ FBullCowCount FBullCowGame::SubmitValidGuess(const FString& Guess)
 	FBullCowCount BullCowCount;
 
 	// Loop through all the guess letters to try to find them in the hidden word
-	size_t HiddenWordLength = m_HiddenWord.length();
+	size_t HiddenWordLength = this->GetHiddenWordLength();
 	for (size_t i = 0; i < HiddenWordLength; ++i)
 	{
 		auto pos = m_HiddenWord.find(Guess[i]);
@@ -64,6 +84,7 @@ FBullCowCount FBullCowGame::SubmitValidGuess(const FString& Guess)
 			++BullCowCount.Cows;
 	}
 
+	m_IsGameWon = (BullCowCount.Bulls == this->GetHiddenWordLength());
 
 	return BullCowCount;
 }

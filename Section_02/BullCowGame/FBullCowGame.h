@@ -8,8 +8,8 @@ using FString = std::string;
 
 struct FBullCowCount
 {
-	int32 Bulls = 0;
-	int32 Cows = 0;
+	size_t Bulls = 0;
+	size_t Cows = 0;
 };
 
 enum class EGuessStatus
@@ -47,5 +47,6 @@ private:
 	int32 m_CurrentTry;	// See Reset for initial values
 	int32 m_MaxTries;
 	FString m_HiddenWord;
+	bool m_IsGameWon;
 };
 

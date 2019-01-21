@@ -37,19 +37,23 @@ int main()
 
 static void PlayGame()
 {
-	BCGame.Reset();
-	int32 MaxTries = BCGame.GetMaxTries();
-
-	// Loop for the number of turns asking for guesses
-	// TODO Change from for to while loop once we're validating files
-	for (int32 i = 0; i < MaxTries; ++i)
+	do
 	{
-		auto Guess = GetValidGuess();
+		BCGame.Reset();
+		int32 MaxTries = BCGame.GetMaxTries();
 
-		// Submit valid guess to the game
-		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
-		std::cout << "Bulls = " << BullCowCount.Bulls << ". Cows = " << BullCowCount.Cows << "\n\n";
-	}
+		std::cout << "\n\n";
+
+		// Loop asking for guesses until game is won or no tries remain
+		while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
+		{
+			auto Guess = GetValidGuess();
+
+			// Submit valid guess to the game
+			FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
+			std::cout << "Bulls = " << BullCowCount.Bulls << ". Cows = " << BullCowCount.Cows << "\n\n";
+		}
+	} while (AskToPlayAgain());	// Continue while user wants to play
 
 	std::cout << '\n';
 }
@@ -64,15 +68,15 @@ static void PrintIntro()
 // Loop continually until we've got a valid guess
 static FText GetValidGuess()
 {
-	// Get a guess from the player
-	std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess : ";
 	FText Guess;
-	getline(std::cin, Guess);
-
 	EGuessStatus Status = EGuessStatus::InvalidStatus;
 
 	do
 	{
+		// Get a guess from the player
+		std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess : ";
+		getline(std::cin, Guess);
+
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status)
 		{
@@ -91,6 +95,9 @@ static FText GetValidGuess()
 		case EGuessStatus::InvalidStatus:
 			std::cout << "Invalid status\n";
 			break;
+
+		default:
+			break;	// Assume string is ok
 		}
 	} while (Status != EGuessStatus::OK);
 
@@ -99,7 +106,7 @@ static FText GetValidGuess()
 
 static bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again ? ";
+	std::cout << "Do you want to play again ? (y/n) ";
 	FText Response;
 	std::getline(std::cin, Response);
 
