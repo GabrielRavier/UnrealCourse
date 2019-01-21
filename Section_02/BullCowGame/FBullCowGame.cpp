@@ -64,8 +64,8 @@ EGuessStatus FBullCowGame::CheckGuessValidity(const FString& Guess) const
 		return EGuessStatus::NotIsogram;
 	else if (this->GetHiddenWordLength() != Guess.length())
 		return EGuessStatus::WrongLength;
-
-	return EGuessStatus::OK;
+	else
+		return EGuessStatus::OK;
 }
 
 FBullCowCount FBullCowGame::SubmitValidGuess(const FString& Guess)
