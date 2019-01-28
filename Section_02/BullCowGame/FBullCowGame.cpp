@@ -1,5 +1,7 @@
 #include "FBullCowGame.h"
 #include <algorithm>
+#include <map>
+#define TMap std::map
 
 int32 FBullCowGame::GetMaxTries() const
 { 
@@ -37,18 +39,19 @@ bool FBullCowGame::IsGameWon() const
 	return m_IsGameWon;
 }
 
-static bool IsIsogram(FString String)
+bool FBullCowGame::IsIsogram(const FString& String) const
 {
-	std::sort(String.begin(), String.end());
-
-	auto len = String.size();
+	auto Str = String;
+	std::sort(Str.begin(), Str.end());
+	
+	auto len = Str.size();
 	for (size_t i = 1; i < len; ++i)
-		if (String[i] == String[i - 1])
+		if (Str[i] == Str[i - 1])
 			return false;
 	return true;
 }
 
-static bool IsLowerCase(const FString& String)
+bool FBullCowGame::IsLowerCase(const FString& String) const
 {
 	return std::find_if(String.begin(), String.end(), [](unsigned char c)
 	{

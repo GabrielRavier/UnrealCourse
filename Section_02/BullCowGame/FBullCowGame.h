@@ -44,6 +44,8 @@ public:
 	FBullCowCount SubmitValidGuess(const FString& Guess);
 
 private:
+	bool IsIsogram(const FString& String) const;
+	bool IsLowerCase(const FString& String) const;
 	int32 m_CurrentTry;	// See Reset for initial values
 	int32 m_MaxTries;
 	FString m_HiddenWord;
