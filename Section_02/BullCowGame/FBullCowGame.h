@@ -40,7 +40,7 @@ public:
 	FBullCowCount SubmitValidGuess(const FString& Guess);
 
 private:
-	bool IsIsogram(FString String) const;
+	bool IsIsogram(const FString& String) const;
 	bool IsLowerCase(const FString& String) const;
 
 	// See Reset for initial values

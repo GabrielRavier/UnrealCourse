@@ -40,7 +40,7 @@ bool FBullCowGame::IsGameWon() const
 	return m_IsGameWon;
 }
 
-bool FBullCowGame::IsIsogram(FString String) const
+bool FBullCowGame::IsIsogram(const FString& String) const
 {
 	if (String.length() <= 0)
 		return true;	// 0/1-length strings are always isograms lol
