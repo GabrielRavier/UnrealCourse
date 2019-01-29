@@ -1,6 +1,8 @@
 #include "FBullCowGame.h"
 #include <algorithm>
 #include <map>
+
+// Make syntax unreal-friendly
 #define TMap std::map
 
 FBullCowGame::FBullCowGame()
@@ -26,7 +28,7 @@ int32 FBullCowGame::GetMaxTries() const
 
 void FBullCowGame::Reset()
 {
-	const FString HIDDEN_WORD = "planet";
+	const FString HIDDEN_WORD = "planet"; // This MUST be an isogram
 
 	m_HiddenWord = HIDDEN_WORD;
 	m_CurrentTry = 1;

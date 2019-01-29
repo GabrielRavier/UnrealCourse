@@ -1,3 +1,6 @@
+/* Game logic (no view code or direct user interaction)
+Simple guess the word game based on Mastermind*/
+
 #pragma once
 #include <string>
 #include <cstdint>
@@ -20,12 +23,6 @@ enum class EGuessStatus
 	WrongLength,
 };
 
-enum class EResetStatus
-{
-	NoHiddenWord,
-	OK,
-};
-
 class FBullCowGame
 {
 public:
@@ -36,7 +33,7 @@ public:
 	FSize GetHiddenWordLength() const;
 	bool IsGameWon() const;
 
-	void Reset();	// TODO Make a more rich return value
+	void Reset();
 	EGuessStatus CheckGuessValidity(const FString& Guess) const;
 
 	// Count bulls and cows, and increase try number assuming guess is valid
@@ -45,7 +42,9 @@ public:
 private:
 	bool IsIsogram(FString String) const;
 	bool IsLowerCase(const FString& String) const;
-	int32 m_CurrentTry;	// See Reset for initial values
+
+	// See Reset for initial values
+	int32 m_CurrentTry;
 	FString m_HiddenWord;
 	bool m_IsGameWon;
 };

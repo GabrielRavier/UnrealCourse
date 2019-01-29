@@ -11,16 +11,18 @@
 #include <cstdint>
 #include "FBullCowGame.h"
 
+// Unreal friendly syntax
 using FText = std::string;
 using int32 = int32_t;
 
+// Interal function prototypes
 static void PrintIntro();
 static void PlayGame();
 static FText GetValidGuess();
 static bool AskToPlayAgain();
 static void PrintGameSummary();
 
-FBullCowGame BCGame;	// Instantiate a new game
+FBullCowGame BCGame;	// Instantiate a new game (re-used across plays)
 
 // Entry point for our application
 int main()
@@ -29,33 +31,30 @@ int main()
 	{
 		PrintIntro();
 		PlayGame();
-		// TODO Add a game summary
+		PrintGameSummary();
 	} while (AskToPlayAgain());
 
 	return 0; // Exit the application
 }
 
-
+// Play a single game to completion
 static void PlayGame()
 {
-	do
+	BCGame.Reset();
+	int32 MaxTries = BCGame.GetMaxTries();
+
+	std::cout << "\n\n";
+
+	// Loop asking for guesses until game is won or no tries remain
+	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
 	{
-		BCGame.Reset();
-		int32 MaxTries = BCGame.GetMaxTries();
+		auto Guess = GetValidGuess();
 
-		std::cout << "\n\n";
-
-		// Loop asking for guesses until game is won or no tries remain
-		while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
-		{
-			auto Guess = GetValidGuess();
-
-			// Submit valid guess to the game
-			FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
-			std::cout << "Bulls = " << BullCowCount.Bulls << ". Cows = " << BullCowCount.Cows << "\n\n";
-		}
-		PrintGameSummary();
-	} while (AskToPlayAgain());	// Continue while user wants to play
+		// Submit valid guess to the game
+		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
+		std::cout << "Bulls = " << BullCowCount.Bulls << ". Cows = " << BullCowCount.Cows << "\n\n";
+	}
+	PrintGameSummary();
 
 	std::cout << '\n';
 }
