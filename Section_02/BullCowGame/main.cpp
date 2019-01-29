@@ -63,7 +63,13 @@ static void PlayGame()
 static void PrintIntro()
 {
 	// Introduce the game
-	std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
+	std::cout << "\n\nWelcome to Bulls and Cows, a fun word game.\n\n";
+	std::cout << "          }   {           ___\n";
+	std::cout << "          (o o)          (o o)\n";
+	std::cout << "   /-------\\ /            \\ /-------\\\n";
+	std::cout << "  / | BULL |O              O| COW  | \\\n";
+	std::cout << " *  |-,--- |                |------|  *\n";
+	std::cout << "    ^      ^                ^      ^\n\n";
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n\n";
 }
 
@@ -88,10 +94,6 @@ static FText GetValidGuess()
 
 		case EGuessStatus::NotIsogram:
 			std::cout << "Please enter a word without repeating letters\n";
-			break;
-
-		case EGuessStatus::NotLowercase:
-			std::cout << "Please enter all lowercase letters\n";
 			break;
 
 		case EGuessStatus::InvalidStatus:

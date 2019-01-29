@@ -3,9 +3,9 @@
 #include <map>
 #define TMap std::map
 
-int32 FBullCowGame::GetMaxTries() const
-{ 
-	return m_MaxTries; 
+FBullCowGame::FBullCowGame()
+{
+	Reset();
 }
 
 int32 FBullCowGame::GetCurrentTry() const
@@ -18,17 +18,16 @@ FSize FBullCowGame::GetHiddenWordLength() const
 	return m_HiddenWord.length();
 }
 
-FBullCowGame::FBullCowGame()
+int32 FBullCowGame::GetMaxTries() const
 {
-	Reset();
+	const TMap<int32, int32> WordLengthToMaxTries{ {3, 4}, {4, 7}, {5, 10}, {6, 16}, {7, 20} };
+	return WordLengthToMaxTries[m_HiddenWord.length()];
 }
 
 void FBullCowGame::Reset()
 {
-	constexpr int MAX_TRIES = 8;
 	const FString HIDDEN_WORD = "planet";
 
-	m_MaxTries = MAX_TRIES;
 	m_HiddenWord = HIDDEN_WORD;
 	m_CurrentTry = 1;
 	m_IsGameWon = false;
@@ -39,15 +38,20 @@ bool FBullCowGame::IsGameWon() const
 	return m_IsGameWon;
 }
 
-bool FBullCowGame::IsIsogram(const FString& String) const
+bool FBullCowGame::IsIsogram(FString String) const
 {
-	auto Str = String;
-	std::sort(Str.begin(), Str.end());
-	
-	auto len = Str.size();
-	for (size_t i = 1; i < len; ++i)
-		if (Str[i] == Str[i - 1])
+	if (String.length() <= 0)
+		return true;	// 0/1-length strings are always isograms lol
+
+	TMap<char, bool> LetterSeen;
+
+	for (char i : String)
+	{
+		i = static_cast<char>(tolower(i));
+		if (LetterSeen[i])
 			return false;
+		LetterSeen[i] = true;
+	}
 	return true;
 }
 
@@ -61,9 +65,7 @@ bool FBullCowGame::IsLowerCase(const FString& String) const
 
 EGuessStatus FBullCowGame::CheckGuessValidity(const FString& Guess) const
 {
-	if (!IsLowerCase(Guess))
-		return EGuessStatus::NotLowercase;
-	else if (!IsIsogram(Guess))
+	if (!IsIsogram(Guess))
 		return EGuessStatus::NotIsogram;
 	else if (this->GetHiddenWordLength() != Guess.length())
 		return EGuessStatus::WrongLength;
