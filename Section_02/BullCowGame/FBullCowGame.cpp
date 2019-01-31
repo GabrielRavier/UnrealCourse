@@ -22,8 +22,14 @@ FSize FBullCowGame::GetHiddenWordLength() const
 
 int32 FBullCowGame::GetMaxTries() const
 {
+	auto len = m_HiddenWord.length();
+	if (len < 3)
+		return 3;
+	if (len > 7)
+		return 24;
+
 	TMap<int32, int32> WordLengthToMaxTries{ {3, 4}, {4, 7}, {5, 10}, {6, 16}, {7, 20} };
-	return WordLengthToMaxTries[m_HiddenWord.length()];
+	return WordLengthToMaxTries[len];
 }
 
 void FBullCowGame::Reset()
