@@ -463,7 +463,6 @@ dkms.conf
 *.xcodeproj
 *.xcworkspace
 *.sln
-!Section_02/*.sln
 *.suo
 *.opensdf
 *.sdf
@@ -504,3 +503,6 @@ Plugins/*/Intermediate/*
 
 # Starter content that can be easily gotten back
 **/Content/StarterContent
+
+# Allow sln file for non-UE project
+!Section_02/*.sln
